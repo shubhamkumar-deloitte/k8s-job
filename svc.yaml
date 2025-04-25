@@ -1,0 +1,13 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: flask-job-app-service
+  namespace: test
+spec:
+  selector:
+    app: flask-job-app
+  ports:
+    - protocol: TCP
+      port: 5001      # Cluster IP port
+      targetPort: 5001 # Container port
+  type: ClusterIP

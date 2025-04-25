@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flask-job-app-deployment
+  namespace: test
+spec:
+  replicas: 1  # You can scale to more replicas if needed
+  selector:
+    matchLabels:
+      app: flask-job-app
+  template:
+    metadata:
+      labels:
+        app: flask-job-app
+    spec:
+      serviceAccountName: flask-job-sa
+      containers:
+      - name: flask-job-app
+        image: shagger/k8sjob:v1  # Replace with your Docker image
+        ports:
+        - containerPort: 5001

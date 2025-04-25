@@ -1,0 +1,33 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: flask-job-sa
+  namespace: test  # or whatever namespace you're using
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: flask-job-role
+  namespace: test
+rules:
+  - apiGroups: ["batch", ""]         # "" means core API group (pods, etc.)
+    resources: ["jobs", "pods"]
+    verbs: ["get", "list", "create", "delete", "watch"]
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: flask-job-rolebinding
+  namespace: test
+subjects:
+  - kind: ServiceAccount
+    name: flask-job-sa
+    namespace: test  # should match the namespace in the ServiceAccount
+roleRef:
+  kind: ClusterRole
+  name: flask-job-role
+  apiGroup: rbac.authorization.k8s.io
+
