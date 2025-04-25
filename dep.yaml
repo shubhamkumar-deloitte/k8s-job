@@ -16,6 +16,6 @@ spec:
       serviceAccountName: flask-job-sa
       containers:
       - name: flask-job-app
-        image: shagger/k8sjob:v1  # Replace with your Docker image
+        image: shagger/k8sjob:v6  # Replace with your Docker image
         ports:
         - containerPort: 5001

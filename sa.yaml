@@ -11,8 +11,8 @@ metadata:
   namespace: test
 rules:
   - apiGroups: ["batch", ""]         # "" means core API group (pods, etc.)
-    resources: ["jobs", "pods"]
-    verbs: ["get", "list", "create", "delete", "watch"]
+    resources: ["jobs", "pods","configmaps"]
+    verbs: ["get", "list", "create", "delete", "watch","edit","patch"]
   - apiGroups: ["apps"]
     resources: ["deployments"]
     verbs: ["get", "list"]
